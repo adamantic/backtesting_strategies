@@ -18,16 +18,22 @@ def calculate_kpis(strat_returns):
     Returns:
     data (list): List of KPI data.
     """
-    # Calculate long-only strategy KPIs without signal
-    strategy_df_2 = pd.DataFrame()
-    strategy_df_2["Returns"] = strat_returns["All Returns"]
-    strategy_df_2["Returns"] = strategy_df_2.mean(axis=1)
-    strategy_df_2["cum_return"] = (1 + strategy_df_2["Returns"]).cumprod()
-
     # Calculate long-only strategy KPIs with signal
     strategy_df = pd.DataFrame()
     strategy_df["Returns"] = strat_returns["Returns"]
     strategy_df["Returns"] = strategy_df.mean(axis=1)
+    strategy_df["cum_return"] = (1 + strategy_df["Returns"]).cumprod() 
+    strategy_df['Position'] = strat_returns['Position']
+    
+    # Calculate long-only strategy KPIs without signal
+    strategy_df_2 = pd.DataFrame()
+    strategy_df_2["Returns_T"] = strat_returns["All Returns"]
+    strategy_df_2["Returns_T"] = strategy_df_2.mean(axis=1)
+    strategy_df_2["Position"] = strategy_df["Position"]
+    idx = strategy_df_2["Position"].eq(1).idxmax()
+    strategy_df_2.loc[idx:, "Position"] = 1
+    strategy_df_2["Returns"] = strategy_df_2["Returns_T"] * strategy_df_2["Position"] 
+    strategy_df_2["cum_return"] = (1 + strategy_df_2["Returns"]).cumprod()  
 
     # Calculate KPI data
     data = [
