@@ -5,7 +5,7 @@ from flask_table import Table, Col
 
 class KPIs(Table):
     kpi = Col('KPI')
-    long_only = Col('Long only')
+    long_only = Col('Long only with signal')
     long_only_no_signal = Col('Long only (no signal)')
 
 def calculate_kpis(strat_returns):

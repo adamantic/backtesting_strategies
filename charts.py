@@ -50,8 +50,8 @@ def generate_charts(ohlc_dict, ticker_signal, short, long, ind, ticker_strat, st
         ax[0].legend()
 
         # Chart 2
-        ax[1].plot(strategy_df["cum_return"], color="green", label="Strategy w/ signal")
-        ax[1].plot(strategy_df_2["cum_return"], color="blue", label="Strategy w/o signal")
+        ax[1].plot(strategy_df["cum_return"], color="teal", label="Strategy w/ signal")
+        ax[1].plot(strategy_df_2["cum_return"], color="black", label="Strategy w/o signal")
         ax[1].legend()
         ax[1].yaxis.set_major_formatter(mtick.PercentFormatter(1.0))
 
