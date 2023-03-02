@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request, session
 from flask_bootstrap import Bootstrap
 import pandas as pd
